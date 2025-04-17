@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -5,9 +7,24 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 
 const raffleItems = [
-  { id: 1, name: 'Audubon Family Membership', description: '1 Year Family Membership to Audubon Zoo, Aquarium, and Insectarium.', image: '/zoo.jpg' },
-  { id: 2, name: '2 Hour Tattoo Session', description: 'Tattoo consult and 2-hour session at Catahoula Tattoo in MidCity.', image: '/tattoo.jpg' },
-  { id: 3, name: 'Professional Photo Session', description: '1 hour golden hour photo session in City Park.', image: '/camera.jpg' },
+  {
+    id: 1,
+    name: 'Audubon Family Membership',
+    description: '1 Year Family Membership to Audubon Zoo, Aquarium, and Insectarium.',
+    image: '/zoo.jpg',
+  },
+  {
+    id: 2,
+    name: '2 Hour Tattoo Session',
+    description: 'Tattoo consult and 2-hour session at Catahoula Tattoo in MidCity.',
+    image: '/tattoo.jpg',
+  },
+  {
+    id: 3,
+    name: 'Professional Photo Session',
+    description: '1 hour golden hour photo session in City Park.',
+    image: '/camera.jpg',
+  },
 ];
 
 const raffleEnd = new Date('2025-05-17T23:59:59');
@@ -38,30 +55,22 @@ export default function RafflePage() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleAllocationChange = (itemId, value) => {
-    setTicketAllocation({ ...ticketAllocation, [itemId]: parseInt(value) || 0 });
+  const handleAllocationChange = (itemId: number, value: string) => {
+    setTicketAllocation({
+      ...ticketAllocation,
+      [itemId]: parseInt(value) || 0,
+    });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     const payload = {
       email,
       totalTickets,
       ticketAllocation,
       deliveryOptIn,
     };
-
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await res.json();
-    if (data.url) {
-      window.location = data.url;  // Redirect to Stripe Checkout
-    }
+    console.log('Submitting raffle entry:', payload);
+    // Add Stripe/payment handling here
   };
 
   return (
@@ -91,7 +100,11 @@ export default function RafflePage() {
         {raffleItems.map((item) => (
           <Card key={item.id}>
             <CardContent className="p-4">
-              <img src={item.image} alt={item.name} className="w-full h-40 object-cover mb-2 rounded" />
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-full h-40 object-cover mb-2 rounded"
+              />
               <h2 className="text-xl font-semibold">{item.name}</h2>
               <p className="mb-2">{item.description}</p>
               <Input
@@ -107,12 +120,18 @@ export default function RafflePage() {
 
       <div className="my-6">
         <label className="flex items-center space-x-2">
-          <Checkbox checked={deliveryOptIn} onCheckedChange={setDeliveryOptIn} disabled={raffleClosed} />
-          <span>Donate for delivery if I win. We will deliver items locally (including Northshore) if you win</span>
+          <Checkbox
+            checked={deliveryOptIn}
+            onCheckedChange={setDeliveryOptIn}
+            disabled={raffleClosed}
+          />
+          <span>Donate for delivery if I win. We will deliver items won.</span>
         </label>
       </div>
 
-      <Button onClick={handleSubmit} disabled={raffleClosed}>Submit and Pay</Button>
+      <Button onClick={handleSubmit} disabled={raffleClosed}>
+        Submit and Pay
+      </Button>
     </div>
   );
 }
