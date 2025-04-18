@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,6 +20,10 @@ export default function RafflePage() {
   const [email, setEmail] = useState('');
   const [timeLeft, setTimeLeft] = useState('');
   const [raffleClosed, setRaffleClosed] = useState(false);
+
+  // State to handle the winner reveal
+  const [winnerTicket, setWinnerTicket] = useState<number | null>(null);
+  const [showWinnerImage, setShowWinnerImage] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,26 +47,23 @@ export default function RafflePage() {
     setTicketAllocation({ ...ticketAllocation, [itemId]: parseInt(value) || 0 });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     const payload = {
       email,
       totalTickets,
       ticketAllocation,
       deliveryOptIn,
     };
+    console.log('Submitting raffle entry:', payload);
+    // Add Stripe/payment handling here
+  };
 
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await res.json();
-    if (data.url) {
-      window.location = data.url;  // Redirect to Stripe Checkout
-    }
+  // Function to handle winner reveal
+  const revealWinner = () => {
+    // Generate a random winner ticket number
+    const winner = Math.floor(Math.random() * (9999 - 5678 + 1)) + 5678;
+    setWinnerTicket(winner);
+    setShowWinnerImage(true);
   };
 
   return (
@@ -109,11 +110,24 @@ export default function RafflePage() {
       <div className="my-6">
         <label className="flex items-center space-x-2">
           <Checkbox checked={deliveryOptIn} onCheckedChange={setDeliveryOptIn} disabled={raffleClosed} />
-          <span>Donate for delivery if I win. We will deliver items locally (including Northshore) if you win</span>
+          <span>Donate for delivery if I win. We will deliver items win</span>
         </label>
       </div>
 
       <Button onClick={handleSubmit} disabled={raffleClosed}>Submit and Pay</Button>
+
+      {/* Button to reveal the winner */}
+      <Button onClick={revealWinner} disabled={raffleClosed || winnerTicket !== null} className="mt-6">
+        Reveal Winner
+      </Button>
+
+      {/* Display Winner's Ticket Number and Image */}
+      {showWinnerImage && (
+        <div className="mt-6 text-center">
+          <h2 className="text-2xl font-semibold text-green-600">Winning Ticket: {winnerTicket}</h2>
+          <img src="/faedodoticket.png" alt="Winning Ticket" className="mx-auto mt-4" />
+        </div>
+      )}
     </div>
   );
 }
