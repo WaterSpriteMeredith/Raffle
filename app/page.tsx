@@ -1,5 +1,5 @@
-import Raffle from '../components/Raffle';
+import raffle from '../components/raffle';
 
 export default function Home() {
-  return <Raffle />;
+  return <raffle />;
 }
