@@ -1,0 +1,70 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Playfair Display', serif;
+  background: radial-gradient(ellipse at top, #0b0c10, #1f1f1f);
+  color: #f0e6f6;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f1f1f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5b2a86;
+  border-radius: 4px;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  font-family: 'Cinzel Decorative', cursive;
+  color: #f9c80e;
+}
+
+/* Buttons and Inputs */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
+
+a {
+  color: #c44536;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Utility classes */
+.text-glow {
+  text-shadow: 0 0 5px #f9c80e, 0 0 10px #5b2a86;
+}
+
+.card-glow {
+  box-shadow: 0 0 10px #5b2a86;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-glow:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px #f9c80e;
+}
