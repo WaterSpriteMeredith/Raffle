@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { Button } from '../ui/button';  // Updated to relative path
-import { Card, CardContent } from '../ui/card';  // Updated to relative path
-import { Input } from '../ui/input';  // Updated to relative path
-import { Checkbox } from '../ui/checkbox';
+import { Button } from './ui/button';
+import { Card, CardContent } from './ui/card';
+import { Input } from './ui/input';
+import { Checkbox } from './ui/checkbox';
+
 
 const raffleItems = [
   { id: 1, name: 'Audubon Family Membership', description: '1 Year Family Membership to Audubon Zoo, Aquarium, and Insectarium.', image: '/zoo.jpg' },
