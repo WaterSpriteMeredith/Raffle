@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 
 const participants = [
   { email: 'user1@example.com', tickets: 5, itemAllocation: { 1: 2, 2: 3 } },
-  { email: 'user2@example.com', tickets: 3, itemAllocation: { 1: 1, 3: 2 } },
-
+  { email: 'user2@example.com', tickets: 3, itemAllocation: { 1: 1, 3: 2 } }
+];
 const AdminPage = () => {
   const [selectedItem, setSelectedItem] = useState(null);
 
