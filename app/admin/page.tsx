@@ -1,11 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../ui/button';
 
 const participants = [
   { email: 'user1@example.com', tickets: 5, itemAllocation: { 1: 2, 2: 3 } },
-  { email: 'user2@example.com', tickets: 3, itemAllocation: { 1: 1, 3: 2 } },
+  { email: 'user2@example.com', tickets: 3, itemAllocation: { 1: 1, 3: 2 } }
+];
+
+// Assuming you have an array of raffle items
+const raffleItems = [
+  { id: 1, name: 'Item 1' },
+  { id: 2, name: 'Item 2' },
+  { id: 3, name: 'Item 3' }
+];
 
 const AdminPage = () => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -14,6 +22,7 @@ const AdminPage = () => {
     const filteredParticipants = participants.filter(p => p.itemAllocation[itemId] > 0);
     const winner = filteredParticipants[Math.floor(Math.random() * filteredParticipants.length)];
     alert(`Winner: ${winner.email} for item ${itemId}`);
+  };
 
   return (
     <div className="p-4">
