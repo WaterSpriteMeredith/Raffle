@@ -122,12 +122,9 @@ export default function RafflePage() {
       </Button>
 
       {/* Display Winner's Ticket Number and Image */}
-      {showWinnerImage && (
-        <div className="mt-6 text-center">
-          <h2 className="text-2xl font-semibold text-green-600">Winning Ticket: {winnerTicket}</h2>
-          <img src="/faedodoticket.png" alt="Winning Ticket" className="mx-auto mt-4" />
-        </div>
-      )}
-    </div>
-  );
-}
+     {showWinnerImage && (
+  <div className="mt-6 text-center">
+    <h2 className="text-2xl font-semibold text-green-600">Winning Ticket: {winnerTicket}</h2>
+    <img src="/faedodoticket.png" alt="Winning Ticket" className="mx-auto mt-4" />
+  </div>
+)}
