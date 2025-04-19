@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../ui/button';
 
 const participants = [
   { email: 'user1@example.com', tickets: 5, itemAllocation: { 1: 2, 2: 3 } },
