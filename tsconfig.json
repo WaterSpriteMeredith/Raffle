@@ -18,10 +18,8 @@
       }
     ],
     "target": "ES2017",
-    "baseUrl": ".",                        // <-- Add this
-    "paths": {                             // <-- And this
-      "@/*": ["./*"]
-    }
+    "baseUrl": ".", // No alias for @, we're relying on relative paths
+    "paths": {}
   },
   "include": [
     "next-env.d.ts",
