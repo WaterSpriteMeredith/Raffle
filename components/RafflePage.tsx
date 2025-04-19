@@ -22,7 +22,6 @@ export default function RafflePage() {
   const [timeLeft, setTimeLeft] = useState('');
   const [raffleClosed, setRaffleClosed] = useState(false);
 
-  
   const [winnerTicket, setWinnerTicket] = useState<number | null>(null);
   const [showWinnerImage, setShowWinnerImage] = useState(false);
 
@@ -56,11 +55,9 @@ export default function RafflePage() {
       deliveryOptIn,
     };
     console.log('Submitting raffle entry:', payload);
-    
+  };
 
-  
   const revealWinner = () => {
-  
     const winner = Math.floor(Math.random() * (9999 - 5678 + 1)) + 5678;
     setWinnerTicket(winner);
     setShowWinnerImage(true);
@@ -131,3 +128,4 @@ export default function RafflePage() {
     </div>
   );
 }
+

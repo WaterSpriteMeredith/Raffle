@@ -1,13 +1,13 @@
 {
   "name": "raffle-site",
   "version": "1.0.0",
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+<<<<<<< HEAD
     "next": "^13.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -16,5 +16,15 @@
   "devDependencies": {
     "@types/react": "19.1.2",
     "typescript": "5.8.3"
+=======
+    "next": "13.5.11",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "4.1.4",
+    "postcss": "^8.4.4",
+    "autoprefixer": "^10.4.7"
+>>>>>>> 36753518facc55c2905676d38d3017a2e3a16957
   }
 }
