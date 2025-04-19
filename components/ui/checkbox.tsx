@@ -5,6 +5,7 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
+// Default export for Checkbox component
 const Checkbox: React.FC<CheckboxProps> = ({ label, error, ...props }) => {
   return (
     <div className="flex items-center space-x-2">
