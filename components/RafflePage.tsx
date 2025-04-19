@@ -128,3 +128,6 @@ export default function RafflePage() {
     <img src="/faedodoticket.png" alt="Winning Ticket" className="mx-auto mt-4" />
   </div>
 )}
+    </div>
+  );
+}
