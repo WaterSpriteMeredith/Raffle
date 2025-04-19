@@ -22,7 +22,6 @@ export default function RafflePage() {
   const [timeLeft, setTimeLeft] = useState('');
   const [raffleClosed, setRaffleClosed] = useState(false);
 
-  
   const [winnerTicket, setWinnerTicket] = useState<number | null>(null);
   const [showWinnerImage, setShowWinnerImage] = useState(false);
 
@@ -56,11 +55,9 @@ export default function RafflePage() {
       deliveryOptIn,
     };
     console.log('Submitting raffle entry:', payload);
-    
+  };
 
-  
   const revealWinner = () => {
-  
     const winner = Math.floor(Math.random() * (9999 - 5678 + 1)) + 5678;
     setWinnerTicket(winner);
     setShowWinnerImage(true);
@@ -122,12 +119,13 @@ export default function RafflePage() {
       </Button>
 
       {/* Display Winner's Ticket Number and Image */}
-     {showWinnerImage && (
-  <div className="mt-6 text-center">
-    <h2 className="text-2xl font-semibold text-green-600">Winning Ticket: {winnerTicket}</h2>
-    <img src="/faedodoticket.png" alt="Winning Ticket" className="mx-auto mt-4" />
-  </div>
-)}
+      {showWinnerImage && (
+        <div className="mt-6 text-center">
+          <h2 className="text-2xl font-semibold text-green-600">Winning Ticket: {winnerTicket}</h2>
+          <img src="/faedodoticket.png" alt="Winning Ticket" className="mx-auto mt-4" />
+        </div>
+      )}
     </div>
   );
 }
+
