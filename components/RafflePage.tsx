@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Card, CardContent } from '@/components/ui/card.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { Input } from '@/components/ui/input.tsx';
+import { Checkbox } from '@/components/ui/checkbox.tsx';
 
 const raffleItems = [
   { id: 1, name: 'Audubon Family Membership', description: '1 Year Family Membership to Audubon Zoo, Aquarium, and Insectarium.', image: '/zoo.jpg' },
