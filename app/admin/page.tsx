@@ -3,13 +3,12 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
-// Define your participants array
 const participants = [
   { email: 'user1@example.com', tickets: 5, itemAllocation: { 1: 2, 2: 3 } },
   { email: 'user2@example.com', tickets: 3, itemAllocation: { 1: 1, 3: 2 } }
 ];
 
-// Define your raffle items
+// Assuming you have an array of raffle items
 const raffleItems = [
   { id: 1, name: 'Item 1' },
   { id: 2, name: 'Item 2' },
