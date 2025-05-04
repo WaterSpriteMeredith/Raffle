@@ -15,19 +15,3 @@ const Card: React.FC<CardProps> = ({ children, className }) => {
 };
 
 export default Card;
-
-interface CardContentProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-// Default export for CardContent component
-const CardContent: React.FC<CardContentProps> = ({ children, className }) => {
-  return (
-    <div className={`p-6 ${className}`}>
-      {children}
-    </div>
-  );
-};
-
-export default CardContent;
