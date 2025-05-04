@@ -1,10 +1,10 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
 import { Checkbox } from './ui/checkbox';
-
 
 const raffleItems = [
   { id: 1, name: 'Audubon Family Membership', description: '1 Year Family Membership to Audubon Zoo, Aquarium, and Insectarium.', image: '/zoo.jpg' },
@@ -21,14 +21,13 @@ export default function RafflePage() {
   const [email, setEmail] = useState('');
   const [timeLeft, setTimeLeft] = useState('');
   const [raffleClosed, setRaffleClosed] = useState(false);
-
   const [winnerTicket, setWinnerTicket] = useState<number | null>(null);
   const [showWinnerImage, setShowWinnerImage] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
-      const diff = raffleEnd - now;
+      const diff = raffleEnd.getTime() - now.getTime();
       if (diff <= 0) {
         clearInterval(interval);
         setTimeLeft('Raffle Closed');
@@ -58,9 +57,17 @@ export default function RafflePage() {
   };
 
   const revealWinner = () => {
-    const winner = Math.floor(Math.random() * (9999 - 5678 + 1)) + 5678;
-    setWinnerTicket(winner);
-    setShowWinnerImage(true);
+    // Selecting a winner from allocated tickets
+    const allocatedTickets = Object.entries(ticketAllocation)
+      .flatMap(([itemId, ticketCount]) => Array(ticketCount).fill(itemId));
+
+    if (allocatedTickets.length > 0) {
+      const winnerItem = allocatedTickets[Math.floor(Math.random() * allocatedTickets.length)];
+      setWinnerTicket(parseInt(winnerItem));
+      setShowWinnerImage(true);
+    } else {
+      alert("No tickets allocated to determine a winner.");
+    }
   };
 
   return (
@@ -81,7 +88,7 @@ export default function RafflePage() {
         type="number"
         placeholder="Number of tickets"
         value={totalTickets}
-        onChange={(e) => setTotalTickets(parseInt(e.target.value))}
+        onChange={(e) => setTotalTickets(parseInt(e.target.value) || 0)}
         className="mb-6"
         disabled={raffleClosed}
       />
@@ -106,8 +113,8 @@ export default function RafflePage() {
 
       <div className="my-6">
         <label className="flex items-center space-x-2">
-          <Checkbox checked={deliveryOptIn} onCheckedChange={setDeliveryOptIn} disabled={raffleClosed} />
-          <span>Donate for delivery if I win. We will deliver items win</span>
+          <Checkbox checked={deliveryOptIn} onChange={(e) => setDeliveryOptIn(e.target.checked)} disabled={raffleClosed} />
+          <span>Donate for delivery if I win. Items will be delivered to winners.</span>
         </label>
       </div>
 
@@ -119,13 +126,12 @@ export default function RafflePage() {
       </Button>
 
       {/* Display Winner's Ticket Number and Image */}
-      {showWinnerImage && (
+      {showWinnerImage && winnerTicket !== null && (
         <div className="mt-6 text-center">
-          <h2 className="text-2xl font-semibold text-green-600">Winning Ticket: {winnerTicket}</h2>
+          <h2 className="text-2xl font-semibold text-green-600">Winning Item ID: {winnerTicket}</h2>
           <img src="/faedodoticket.png" alt="Winning Ticket" className="mx-auto mt-4" />
         </div>
       )}
     </div>
   );
 }
-
